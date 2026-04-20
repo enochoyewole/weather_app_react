@@ -1,0 +1,74 @@
+.wrapper { margin-top: 4px; }
+
+.sectionTitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+/* ── Individual day card ── */
+.dayCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 12px 6px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: var(--ease);
+  cursor: default;
+}
+.dayCard:hover { border-color: var(--border-hover); background: var(--bg-card-hover); }
+.dayCard.today { border-color: hsla(233, 67%, 56%, 0.4); }
+
+.dayLabel {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.dayIcon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.temps {
+  display: flex;
+  gap: 4px;
+  font-size: 11px;
+}
+
+.high { font-weight: 600; color: var(--text-primary); }
+.low  { color: var(--text-secondary); }
+
+/* ── Skeleton cards ── */
+.skelCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  height: 110px;
+  animation: shimmer 1.6s ease infinite;
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 580px) {
+  .grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+}

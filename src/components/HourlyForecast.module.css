@@ -1,0 +1,119 @@
+.hourlyCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 16px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sectionTitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ── Day selector ── */
+.daySelectorWrap { position: relative; }
+
+.daySelector {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 28px 5px 10px;
+  cursor: pointer;
+  outline: none;
+  transition: var(--ease);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888aad' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+.daySelector:focus { border-color: var(--accent); }
+
+/* ── Hourly list ── */
+.list {
+  overflow-y: auto;
+  max-height: 500px;
+}
+
+/* ── Single hourly row ── */
+.hourlyItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  transition: var(--ease);
+}
+.hourlyItem:last-child { border-bottom: none; }
+.hourlyItem:hover { background: var(--bg-card-hover); }
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hourlyIcon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.hourlyTime {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  min-width: 50px;
+}
+
+.hourlyTemp {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ── Skeleton ── */
+.skelPill {
+  width: 80px;
+  height: 28px;
+  background: var(--bg-page);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  animation: shimmer 1.6s ease infinite;
+}
+
+.skelRow {
+  height: 50px;
+  background: var(--bg-card-hover);
+  border-bottom: 1px solid var(--border);
+  animation: shimmer 1.6s ease infinite;
+}
+.skelRow:last-child { border-bottom: none; }
+.skelRow:nth-child(2) { animation-delay: 0.1s; }
+.skelRow:nth-child(3) { animation-delay: 0.2s; }
+.skelRow:nth-child(4) { animation-delay: 0.3s; }
+.skelRow:nth-child(5) { animation-delay: 0.4s; }
+.skelRow:nth-child(6) { animation-delay: 0.5s; }
+.skelRow:nth-child(7) { animation-delay: 0.6s; }
+.skelRow:nth-child(8) { animation-delay: 0.7s; }
+
+@media (max-width: 860px) {
+  .list { max-height: 380px; }
+}

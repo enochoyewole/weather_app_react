@@ -1,0 +1,67 @@
+.loadingState { display: block; }
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1fr 310px;
+  gap: 18px;
+  align-items: start;
+}
+
+.leftCol {}
+.rightCol {}
+
+/* ── Skeleton current card ── */
+.skeletonCurrent {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  height: 200px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.dotsWrap {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  animation: dotBounce 1.2s ease-in-out infinite;
+}
+.dot:nth-child(1) { animation-delay: 0s; }
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+
+.loadingLabel {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ── Stats grid ── */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .contentGrid { grid-template-columns: 1fr; }
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+  .rightCol { order: 1; }
+  .leftCol  { order: 0; }
+}
+
+@media (max-width: 580px) {
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+}

@@ -1,0 +1,40 @@
+.statCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: var(--ease);
+  animation: fadeInUp 0.3s ease both;
+}
+.statCard:hover { border-color: var(--border-hover); }
+
+.statCard:nth-child(1) { animation-delay: 0.04s; }
+.statCard:nth-child(2) { animation-delay: 0.08s; }
+.statCard:nth-child(3) { animation-delay: 0.12s; }
+.statCard:nth-child(4) { animation-delay: 0.16s; }
+
+.statLabel {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.statValue {
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.skeleton {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 580px) {
+  .statValue { font-size: 20px; }
+}

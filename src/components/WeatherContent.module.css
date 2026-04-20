@@ -1,0 +1,31 @@
+.weatherContent {
+  animation: fadeInUp 0.35s ease both;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1fr 310px;
+  gap: 18px;
+  align-items: start;
+}
+
+.leftCol {}
+.rightCol {}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 860px) {
+  .contentGrid { grid-template-columns: 1fr; }
+  .statsGrid   { grid-template-columns: repeat(2, 1fr); }
+  .rightCol    { order: 1; }
+  .leftCol     { order: 0; }
+}
+
+@media (max-width: 580px) {
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+}
