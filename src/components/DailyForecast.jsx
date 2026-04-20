@@ -2,15 +2,8 @@ import styles from './DailyForecast.module.css';
 import { getWeatherIcon, WMO_DESC } from '../utils/weatherIcons';
 import { fmtTemp, dayNameShort, isToday } from '../utils/formatters';
 
-/**
- * DailyForecast — 7-day grid of day cards
- * Props:
- *  daily  — Open-Meteo daily object { time[], weather_code[], temperature_2m_max[], temperature_2m_min[], precipitation_sum[] }
- *  prefs  — { temp, wind, precip }
- *  skeleton — boolean
- */
 export default function DailyForecast({ daily, prefs, skeleton = false }) {
-  if (skeleton) {
+  if (skeleton || !daily) {
     return (
       <div className={styles.wrapper}>
         <p className={styles.sectionTitle}>Daily forecast</p>
@@ -43,12 +36,9 @@ export default function DailyForecast({ daily, prefs, skeleton = false }) {
   );
 }
 
-/**
- * DayCard — single day column inside the grid (reused 7 times)
- */
 function DayCard({ dateStr, wmoCode, precip, maxTemp, minTemp, prefs }) {
-  const today = isToday(dateStr);
-  const label = today ? 'Today' : dayNameShort(dateStr);
+  const today   = isToday(dateStr);
+  const label   = today ? 'Today' : dayNameShort(dateStr);
   const iconSrc = getWeatherIcon(wmoCode, precip);
   const iconAlt = WMO_DESC[wmoCode] || '';
 

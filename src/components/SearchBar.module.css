@@ -71,7 +71,7 @@
 .searchBtn:hover { background: var(--accent-hover); }
 .searchBtn:active { transform: scale(0.97); }
 
-/* Suggestions */
+
 .suggestionsBox {
   position: absolute;
   left: 50%;

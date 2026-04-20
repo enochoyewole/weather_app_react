@@ -9,17 +9,7 @@ import WeatherContent from './components/WeatherContent';
 
 import styles from './App.module.css';
 
-/**
- * App — root component.
- *
- * Owns no state itself — all state lives in useWeather().
- * Renders the correct UI state based on appState:
- *   'idle'       → just the hero search
- *   'loading'    → skeleton layout
- *   'success'    → full weather data
- *   'error'      → error screen with retry
- *   'no-results' → "No search result found!" inline
- */
+
 export default function App() {
   const {
     prefs, appState, weatherData, location,
@@ -37,7 +27,7 @@ export default function App() {
     applyImperial,
   } = useWeather();
 
-  // Try geolocation once on mount
+  
   useEffect(() => {
     initGeolocation();
   }, [initGeolocation]);
@@ -45,7 +35,6 @@ export default function App() {
   return (
     <div className={styles.appWrapper}>
 
-      {/* ── Navbar (always visible) ── */}
       <Navbar
         prefs={prefs}
         isMetric={isMetric}
@@ -55,10 +44,8 @@ export default function App() {
         onApplyImperial={applyImperial}
       />
 
-      {/* ── Main content ── */}
       <main className={styles.mainContainer}>
 
-        {/* Search bar — hidden during error state, visible otherwise */}
         {appState !== 'error' && (
           <SearchBar
             suggestions={suggestions}
@@ -71,13 +58,10 @@ export default function App() {
           />
         )}
 
-        {/* Loading skeleton */}
         {appState === 'loading' && <LoadingState />}
 
-        {/* Error screen */}
         {appState === 'error' && <ErrorState onRetry={retry} />}
 
-        {/* Weather data */}
         {appState === 'success' && weatherData && (
           <WeatherContent
             weatherData={weatherData}

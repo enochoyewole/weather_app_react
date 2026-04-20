@@ -20,7 +20,7 @@
   color: var(--text-primary);
 }
 
-/* ── Day selector ── */
+
 .daySelectorWrap { position: relative; }
 
 .daySelector {
@@ -43,13 +43,13 @@
 }
 .daySelector:focus { border-color: var(--accent); }
 
-/* ── Hourly list ── */
+
 .list {
   overflow-y: auto;
   max-height: 500px;
 }
 
-/* ── Single hourly row ── */
+
 .hourlyItem {
   display: flex;
   align-items: center;
@@ -89,7 +89,7 @@
   color: var(--text-primary);
 }
 
-/* ── Skeleton ── */
+
 .skelPill {
   width: 80px;
   height: 28px;

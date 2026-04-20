@@ -1,21 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './Navbar.module.css';
 
-/**
- * Navbar
- * Props:
- *  prefs        — { temp, wind, precip }
- *  isMetric     — boolean
- *  isImperial   — boolean
- *  onSetPref    — (key, val) => void
- *  onApplyMetric    — () => void
- *  onApplyImperial  — () => void
- */
+
 export default function Navbar({ prefs, isMetric, isImperial, onSetPref, onApplyMetric, onApplyImperial }) {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  // Close when clicking outside
+  
   useEffect(() => {
     function handleClick(e) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -59,22 +50,18 @@ export default function Navbar({ prefs, isMetric, isImperial, onSetPref, onApply
 
         {open && (
           <div className={styles.dropdownMenu} role="menu">
-            {/* Quick switch */}
             <button className={styles.switchBtn} onClick={handleSwitch} role="menuitem">
               {switchLabel}
             </button>
 
-            {/* Temperature */}
             <div className={styles.sectionLabel}>Temperature</div>
             <DropdownOption label="Celsius (°C)"    active={prefs.temp === 'C'} onClick={() => onSetPref('temp', 'C')} />
             <DropdownOption label="Fahrenheit (°F)" active={prefs.temp === 'F'} onClick={() => onSetPref('temp', 'F')} />
 
-            {/* Wind Speed */}
             <div className={styles.sectionLabel}>Wind Speed</div>
             <DropdownOption label="km/h" active={prefs.wind === 'kmh'} onClick={() => onSetPref('wind', 'kmh')} />
             <DropdownOption label="mph"  active={prefs.wind === 'mph'} onClick={() => onSetPref('wind', 'mph')} />
 
-            {/* Precipitation */}
             <div className={styles.sectionLabel}>Precipitation</div>
             <DropdownOption label="Millimeters (mm)" active={prefs.precip === 'mm'} onClick={() => onSetPref('precip', 'mm')} />
             <DropdownOption label="Inches (in)"      active={prefs.precip === 'in'} onClick={() => onSetPref('precip', 'in')} />
@@ -85,7 +72,6 @@ export default function Navbar({ prefs, isMetric, isImperial, onSetPref, onApply
   );
 }
 
-/** Reusable single option row inside the dropdown */
 function DropdownOption({ label, active, onClick }) {
   return (
     <button

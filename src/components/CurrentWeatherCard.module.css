@@ -5,7 +5,7 @@
   margin-bottom: 14px;
 }
 
-/* The SVG IS the background — it fills the card */
+
 .currentBg {
   display: block;
   width: 100%;
@@ -13,7 +13,7 @@
   border-radius: var(--r-xl);
 }
 
-/* Content floats absolutely over the SVG */
+
 .body {
   position: absolute;
   inset: 0;

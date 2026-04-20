@@ -1,6 +1,4 @@
-/**
- * Maps Open-Meteo WMO weather codes to icon filenames in /public/icons/
- */
+
 export function getWeatherIcon(wmoCode, precipMm) {
   if ([95, 96, 99].includes(wmoCode))                       return '/icons/icon-storm.webp';
   if ([71, 73, 75, 77, 85, 86].includes(wmoCode))           return '/icons/icon-snow.webp';

@@ -14,7 +14,7 @@
   gap: 8px;
 }
 
-/* ── Individual day card ── */
+
 .dayCard {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -55,7 +55,7 @@
 .high { font-weight: 600; color: var(--text-primary); }
 .low  { color: var(--text-secondary); }
 
-/* ── Skeleton cards ── */
+
 .skelCard {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -64,7 +64,7 @@
   animation: shimmer 1.6s ease infinite;
 }
 
-/* ── Responsive ── */
+
 @media (max-width: 860px) {
   .grid { grid-template-columns: repeat(4, 1fr); }
 }

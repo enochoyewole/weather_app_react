@@ -1,18 +1,13 @@
 import axios from 'axios';
 
-/**
- * Search for places by name — returns an array of Nominatim results
- * each with { lat, lon, display_name, address }
- */
+
 export async function geocodeSearch(query) {
   const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=5&addressdetails=1`;
   const res = await axios.get(url, { headers: { 'Accept-Language': 'en' } });
   return res.data;
 }
 
-/**
- * Convert GPS coordinates back into a human-readable city name
- */
+
 export async function reverseGeocode(lat, lon) {
   const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`;
   const res = await axios.get(url, { headers: { 'Accept-Language': 'en' } });
@@ -20,10 +15,7 @@ export async function reverseGeocode(lat, lon) {
   return addr.city || addr.town || addr.village || addr.county || res.data.display_name.split(',')[0];
 }
 
-/**
- * Fetch 7-day weather forecast from Open-Meteo (no API key required)
- * Returns { current, hourly, daily } objects
- */
+
 export async function fetchWeather(lat, lon) {
   const res = await axios.get('https://api.open-meteo.com/v1/forecast', {
     params: {

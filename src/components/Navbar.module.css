@@ -16,7 +16,7 @@
   display: block;
 }
 
-/* ── Units dropdown ── */
+
 .unitsDropdown { position: relative; }
 
 .unitsBtn {
@@ -53,7 +53,7 @@
 }
 .dropdownArrow.open { transform: rotate(180deg); }
 
-/* Dropdown panel */
+
 .dropdownMenu {
   position: absolute;
   right: 0;
@@ -68,7 +68,7 @@
   animation: fadeInUp 0.12s ease both;
 }
 
-/* Switch button at top */
+
 .switchBtn {
   display: block;
   width: 100%;
@@ -86,7 +86,7 @@
 }
 .switchBtn:hover { background: rgba(255,255,255,0.05); }
 
-/* Section labels */
+
 .sectionLabel {
   font-family: var(--font-body);
   font-size: 11px;
@@ -96,7 +96,7 @@
   letter-spacing: 0.3px;
 }
 
-/* Option rows */
+
 .dropdownOption {
   display: flex;
   align-items: center;

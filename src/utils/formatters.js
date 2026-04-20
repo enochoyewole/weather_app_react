@@ -1,7 +1,4 @@
-/**
- * Unit formatters — each takes a raw API value and a prefs object
- * and returns a formatted display string.
- */
+
 
 export function fmtTemp(celsius, prefs) {
   if (prefs.temp === 'F') return `${Math.round(celsius * 9 / 5 + 32)}°`;
@@ -18,9 +15,7 @@ export function fmtPrecip(mm, prefs) {
   return `${mm.toFixed(1)} mm`;
 }
 
-/**
- * Date helpers
- */
+
 const DAYS_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const DAYS_LONG  = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 

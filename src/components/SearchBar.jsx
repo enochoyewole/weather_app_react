@@ -1,17 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import styles from './SearchBar.module.css';
 
-/**
- * SearchBar
- * Props:
- *  suggestions  — array of Nominatim result objects
- *  isSearching  — boolean (show spinner row)
- *  onInput      — (query) => void  (debounced autocomplete)
- *  onSearch     — (query) => void  (button / Enter)
- *  onSelect     — (result) => void (click a suggestion)
- *  onClear      — () => void       (clear suggestions)
- *  showNoResults — boolean
- */
+
 export default function SearchBar({
   suggestions, isSearching,
   onInput, onSearch, onSelect, onClear,
@@ -40,7 +30,7 @@ export default function SearchBar({
     onSelect(result);
   }
 
-  // Close suggestions on outside click
+  
   useEffect(() => {
     function handler(e) {
       if (!e.target.closest('[data-search-hero]')) onClear();
@@ -74,7 +64,6 @@ export default function SearchBar({
         <button className={styles.searchBtn} onClick={handleSearch}>Search</button>
       </div>
 
-      {/* Suggestions box */}
       {showSuggestions && (
         <div className={styles.suggestionsBox}>
           {isSearching && (
@@ -100,7 +89,6 @@ export default function SearchBar({
         </div>
       )}
 
-      {/* No results */}
       {showNoResults && (
         <p className={styles.noResultsMsg}>No search result found!</p>
       )}

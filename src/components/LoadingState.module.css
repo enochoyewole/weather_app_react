@@ -10,7 +10,7 @@
 .leftCol {}
 .rightCol {}
 
-/* ── Skeleton current card ── */
+
 .skeletonCurrent {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -46,7 +46,7 @@
   color: var(--text-muted);
 }
 
-/* ── Stats grid ── */
+
 .statsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -54,7 +54,7 @@
   margin-bottom: 24px;
 }
 
-/* ── Responsive ── */
+
 @media (max-width: 860px) {
   .contentGrid { grid-template-columns: 1fr; }
   .statsGrid { grid-template-columns: repeat(2, 1fr); }

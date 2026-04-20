@@ -1,6 +1,4 @@
-/* ================================================================
-   LOCAL FONTS
-   ================================================================ */
+
 @font-face {
   font-family: 'DM Sans';
   src: url('/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf') format('truetype');
@@ -65,9 +63,7 @@
   font-display: swap;
 }
 
-/* ================================================================
-   RESET & ROOT VARIABLES
-   ================================================================ */
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -117,9 +113,7 @@ body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 10px; }
 
-/* ================================================================
-   ANIMATIONS (shared)
-   ================================================================ */
+
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }

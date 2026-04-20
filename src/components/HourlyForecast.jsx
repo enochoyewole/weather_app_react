@@ -2,30 +2,19 @@ import styles from './HourlyForecast.module.css';
 import { getWeatherIcon } from '../utils/weatherIcons';
 import { fmtTemp, fmtHour, dayNameLong, isToday } from '../utils/formatters';
 
-/**
- * HourlyForecast — right-column card with day selector + scrollable hour list
- * Props:
- *  hourly           — Open-Meteo hourly object
- *  daily            — Open-Meteo daily object (for day selector options)
- *  selectedDayIndex — number
- *  onDayChange      — (index) => void
- *  prefs            — { temp, wind, precip }
- *  skeleton         — boolean
- */
 export default function HourlyForecast({
   hourly, daily, selectedDayIndex, onDayChange, prefs, skeleton = false,
 }) {
-  const targetDate = daily?.time[selectedDayIndex];
+  const targetDate = !skeleton && daily?.time?.[selectedDayIndex];
 
-  // Filter hourly entries for the selected day
-  const hourlyItems = !skeleton && hourly
+  const hourlyItems = !skeleton && hourly && targetDate
     ? hourly.time.reduce((acc, isoStr, i) => {
         if (isoStr.split('T')[0] === targetDate) {
           acc.push({
             isoStr,
-            temp: hourly.temperature_2m[i],
+            temp:    hourly.temperature_2m[i],
             wmoCode: hourly.weather_code[i],
-            precip: hourly.precipitation ? hourly.precipitation[i] : 0,
+            precip:  hourly.precipitation ? hourly.precipitation[i] : 0,
           });
         }
         return acc;
@@ -47,11 +36,14 @@ export default function HourlyForecast({
               onChange={e => onDayChange(parseInt(e.target.value))}
               aria-label="Select day"
             >
-              {daily.time.map((dateStr, i) => (
-                <option key={dateStr} value={i}>
-                  {isToday(dateStr) ? 'Today' : dayNameLong(dateStr)}
-                </option>
-              ))}
+              {daily?.time?.map((dateStr, i) => {
+                if (!dateStr) return null;
+                return (
+                  <option key={dateStr} value={i}>
+                    {isToday(dateStr) ? 'Today' : dayNameLong(dateStr)}
+                  </option>
+                );
+              })}
             </select>
           </div>
         )}
@@ -76,10 +68,6 @@ export default function HourlyForecast({
   );
 }
 
-/**
- * HourlyItem — single row (icon + time on left, temp on right)
- * Reused once per visible hour
- */
 function HourlyItem({ time, temp, iconSrc }) {
   return (
     <div className={styles.hourlyItem}>

@@ -1,14 +1,6 @@
 import styles from './CurrentWeatherCard.module.css';
 
-/**
- * CurrentWeatherCard — the hero banner card with SVG background
- * Props:
- *  cityName  — string
- *  date      — string  e.g. "Tuesday, Aug 5, 2025"
- *  temp      — string  e.g. "68°"
- *  iconSrc   — string  path to weather icon
- *  iconAlt   — string
- */
+
 export default function CurrentWeatherCard({ cityName, date, temp, iconSrc, iconAlt }) {
   return (
     <div className={styles.currentCard}>

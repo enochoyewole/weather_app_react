@@ -6,15 +6,7 @@ import { getWeatherIcon, WMO_DESC } from '../utils/weatherIcons';
 import { fmtTemp, fmtWind, fmtPrecip, longDate } from '../utils/formatters';
 import styles from './WeatherContent.module.css';
 
-/**
- * WeatherContent — full weather data layout
- * Props:
- *  weatherData      — Open-Meteo response object
- *  cityName         — string
- *  prefs            — { temp, wind, precip }
- *  selectedDayIndex — number
- *  onDayChange      — (index) => void
- */
+
 export default function WeatherContent({
   weatherData, cityName, prefs, selectedDayIndex, onDayChange,
 }) {
@@ -24,7 +16,6 @@ export default function WeatherContent({
     <div className={styles.weatherContent}>
       <div className={styles.contentGrid}>
 
-        {/* ── LEFT COLUMN ── */}
         <div className={styles.leftCol}>
 
           <CurrentWeatherCard
@@ -46,7 +37,6 @@ export default function WeatherContent({
 
         </div>
 
-        {/* ── RIGHT COLUMN ── */}
         <div className={styles.rightCol}>
           <HourlyForecast
             hourly={hourly}

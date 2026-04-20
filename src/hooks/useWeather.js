@@ -1,39 +1,18 @@
 import { useState, useCallback, useRef } from 'react';
 import { geocodeSearch, reverseGeocode, fetchWeather } from '../utils/api';
 
-/**
- * useWeather — central state hook for the entire app.
- *
- * Manages:
- *  - unit preferences (temp / wind / precip)
- *  - location (lat, lon, cityName)
- *  - weather data from Open-Meteo
- *  - UI state (idle | loading | success | error | no-results)
- *  - search suggestions with debounce
- *  - selected day index for hourly forecast
- */
-
 const DEFAULT_PREFS = { temp: 'F', wind: 'mph', precip: 'in' };
 
 export function useWeather() {
-  // ── Unit preferences ──────────────────────────────────────────
-  const [prefs, setPrefs] = useState(DEFAULT_PREFS);
-
-  // ── App UI state ──────────────────────────────────────────────
-  // 'idle' | 'loading' | 'success' | 'error' | 'no-results'
-  const [appState, setAppState] = useState('idle');
-
-  // ── Location & data ───────────────────────────────────────────
-  const [location, setLocation] = useState({ lat: null, lon: null, cityName: '' });
-  const [weatherData, setWeatherData] = useState(null);
+  const [prefs, setPrefs]               = useState(DEFAULT_PREFS);
+  const [appState, setAppState]         = useState('idle');
+  const [location, setLocation]         = useState({ lat: null, lon: null, cityName: '' });
+  const [weatherData, setWeatherData]   = useState(null);
   const [selectedDayIndex, setSelectedDayIndex] = useState(0);
-
-  // ── Search suggestions ────────────────────────────────────────
-  const [suggestions, setSuggestions] = useState([]);   // array of Nominatim results
-  const [isSearching, setIsSearching] = useState(false); // spinner in suggestion box
+  const [suggestions, setSuggestions]   = useState([]);
+  const [isSearching, setIsSearching]   = useState(false);
   const debounceRef = useRef(null);
 
-  // ── Internal: load weather once lat/lon are known ─────────────
   const loadWeather = useCallback(async (lat, lon, cityName) => {
     setAppState('loading');
     setSelectedDayIndex(0);
@@ -47,9 +26,11 @@ export function useWeather() {
     }
   }, []);
 
-  // ── Geolocation init on mount (called from App) ───────────────
   const initGeolocation = useCallback(() => {
-    if (!navigator.geolocation) return;
+    if (!navigator.geolocation) {
+      setAppState('idle');
+      return;
+    }
     setAppState('loading');
     navigator.geolocation.getCurrentPosition(
       async pos => {
@@ -62,11 +43,10 @@ export function useWeather() {
         }
       },
       () => setAppState('idle'),
-      { timeout: 6000 }
+      { timeout: 7000 }
     );
   }, [loadWeather]);
 
-  // ── Search input debounce → suggestions ──────────────────────
   const handleSearchInput = useCallback((query) => {
     if (query.length < 2) {
       setSuggestions([]);
@@ -92,7 +72,6 @@ export function useWeather() {
     setIsSearching(false);
   }, []);
 
-  // ── Select a suggestion ───────────────────────────────────────
   const selectSuggestion = useCallback(async (result) => {
     clearSuggestions();
     const lat = parseFloat(result.lat);
@@ -102,10 +81,10 @@ export function useWeather() {
     await loadWeather(lat, lon, cityName);
   }, [clearSuggestions, loadWeather]);
 
-  // ── Direct search (Search button / Enter key) ─────────────────
   const handleSearch = useCallback(async (query) => {
     if (!query.trim()) return;
     clearSuggestions();
+    setAppState('loading');
     try {
       const results = await geocodeSearch(query);
       if (!results.length) {
@@ -123,7 +102,6 @@ export function useWeather() {
     }
   }, [clearSuggestions, loadWeather]);
 
-  // ── Retry ─────────────────────────────────────────────────────
   const retry = useCallback(() => {
     if (location.lat && location.lon) {
       loadWeather(location.lat, location.lon, location.cityName);
@@ -132,7 +110,6 @@ export function useWeather() {
     }
   }, [location, loadWeather]);
 
-  // ── Unit preference helpers ───────────────────────────────────
   const setPref = useCallback((key, val) => {
     setPrefs(prev => ({ ...prev, [key]: val }));
   }, []);
@@ -145,16 +122,14 @@ export function useWeather() {
     setPrefs({ temp: 'F', wind: 'mph', precip: 'in' });
   }, []);
 
-  const isMetric  = prefs.temp === 'C' && prefs.wind === 'kmh' && prefs.precip === 'mm';
-  const isImperial = prefs.temp === 'F' && prefs.wind === 'mph' && prefs.precip === 'in';
+  const isMetric   = prefs.temp === 'C'  && prefs.wind === 'kmh' && prefs.precip === 'mm';
+  const isImperial = prefs.temp === 'F'  && prefs.wind === 'mph' && prefs.precip === 'in';
 
   return {
-    // state
     prefs, appState, weatherData, location,
     selectedDayIndex, setSelectedDayIndex,
     suggestions, isSearching,
     isMetric, isImperial,
-    // actions
     initGeolocation,
     handleSearchInput,
     handleSearch,
